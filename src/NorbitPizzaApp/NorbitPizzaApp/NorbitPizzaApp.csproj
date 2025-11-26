@@ -8,4 +8,10 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Classes\Model\" />
+    <Folder Include="Classes\BusinessLogic\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+
 </Project>
