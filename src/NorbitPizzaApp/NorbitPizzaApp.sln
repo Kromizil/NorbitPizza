@@ -5,6 +5,13 @@ VisualStudioVersion = 17.14.36414.22 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorbitPizzaApp", "NorbitPizzaApp\NorbitPizzaApp.csproj", "{E5FC20A1-418D-4A95-8514-77BF35A6FBB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NorbitPizzaApp.Api", "NorbitPizzaApp.Api\NorbitPizzaApp.Api.csproj", "{098A982C-6EF4-4246-A10D-9D397050169E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0B7924A2-D3E3-411D-A825-6152FCC92A07}"
+	ProjectSection(SolutionItems) = preProject
+		compose.yaml = compose.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,10 @@ Global
 		{E5FC20A1-418D-4A95-8514-77BF35A6FBB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5FC20A1-418D-4A95-8514-77BF35A6FBB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5FC20A1-418D-4A95-8514-77BF35A6FBB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{098A982C-6EF4-4246-A10D-9D397050169E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{098A982C-6EF4-4246-A10D-9D397050169E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{098A982C-6EF4-4246-A10D-9D397050169E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{098A982C-6EF4-4246-A10D-9D397050169E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

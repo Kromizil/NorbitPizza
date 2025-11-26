@@ -1,0 +1,7 @@
+﻿services:
+  norbitpizzaapp.api:
+    image: norbitpizzaapp.api
+    build:
+      context: .
+      dockerfile: NorbitPizzaApp.Api/Dockerfile
+
