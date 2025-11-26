@@ -4,6 +4,11 @@
     build:
       context: .
       dockerfile: NorbitPizzaApp.Api/Dockerfile
+    environment:
+      ASPNETCORE_HTTP_PORTS: '5066'
+      ASPNETCORE_ENVIRONMENT: 'Development'
+    ports:
+      - 5066:5066
   sql-server:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
