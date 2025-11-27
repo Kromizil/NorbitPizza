@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NorbitPizzaApp.Classes.Model
 {
-    partial class Order
+   public partial class Order
     {
         public int OrderId { get; set; }
 

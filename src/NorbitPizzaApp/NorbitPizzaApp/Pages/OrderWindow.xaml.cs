@@ -1,4 +1,5 @@
-﻿using NorbitPizzaApp.Classes.Model;
+﻿using NorbitPizzaApp.Classes.ApiLogic;
+using NorbitPizzaApp.Classes.Model;
 using NorbitPizzaApp.Classes.ModelsDto;
 using System;
 using System.Collections.Generic;
@@ -22,10 +23,12 @@ namespace NorbitPizzaApp.Pages
     public partial class OrderWindow : Window
     {
         List<PartialProductBasketClass> _listProducts = new();
+        decimal _price = 0;
         public OrderWindow(List<PartialProductBasketClass> listProducts, decimal totalSum)
         {
             InitializeComponent();
             _listProducts = listProducts;
+            _price = totalSum;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -35,7 +38,7 @@ namespace NorbitPizzaApp.Pages
 
         private void OrderBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(TbAddress.Text) || string.IsNullOrWhiteSpace(TbName.Text))
+            if(string.IsNullOrWhiteSpace(TbAddress.Text) || string.IsNullOrWhiteSpace(TbName.Text) || string.IsNullOrWhiteSpace(TbPhone.Text))
             {
                 MessageBox.Show("Заполните все поля!");
             }
@@ -44,8 +47,17 @@ namespace NorbitPizzaApp.Pages
                 Address = TbAddress.Text,
                 Name = TbName.Text,
                 Comment = TbComment.Text,
-                LastName = TbLastName.Text
+                LastName = TbLastName.Text,
+                Phone = TbPhone.Text,
+                CreatedAt = DateTime.Now,
+                IsPickup = CbIsPickUp.IsChecked,
+                TotalPrice = Convert.ToDouble(_price)
             };
+
+            ApiService.PostOrderAsync(order);
+
+
+
         }
 
 

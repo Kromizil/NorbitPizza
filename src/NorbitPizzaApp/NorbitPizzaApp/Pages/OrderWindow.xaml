@@ -79,6 +79,9 @@ MaxWidth="270" Loaded="Window_Loaded">
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Grid.Row="4">
                     <Border Margin="5" Height="30" CornerRadius="15" BorderThickness="1.5" BorderBrush="LightGray">
+                        <TextBox x:Name="TbPhone" Margin="5 0 0 0" Padding="5" MaterialDesign:HintAssist.Hint="Номер" Height="30" Grid.Column="0"/>
+                    </Border>
+                    <Border Margin="5" Height="30" CornerRadius="15" BorderThickness="1.5" BorderBrush="LightGray">
                         <TextBox x:Name="TbAddress" Margin="5 0 0 0" Padding="5" MaterialDesign:HintAssist.Hint="Адрес" Height="30" Grid.Column="0"/>
                     </Border>
                     <Border Margin="5 5 5 10" Height="30" CornerRadius="15" BorderThickness="1.5" BorderBrush="LightGray">

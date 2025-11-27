@@ -46,15 +46,15 @@ namespace NorbitPizzaApp.Classes.ApiLogic
         {
             return client.GetFromJsonAsync<List<FormatDTO>>($"/PizzaFormat/{ProductNum}");
         }
-        //public static Task<Order> PostOrderAsync(Order order)
-        //{
-        //    return client.PostAsJsonAsync("/Orders", order)
-        //                 .ContinueWith(responseTask =>
-        //                 {
-        //                     var response = responseTask.Result;
-        //                     response.EnsureSuccessStatusCode();
-        //                     return response.Content.ReadFromJsonAsync<Order>();
-        //                 }).Unwrap();
-        //}
+        public static Task<Order> PostOrderAsync(Order order)
+        {
+            return client.PostAsJsonAsync("/Orders", order)
+                         .ContinueWith(responseTask =>
+                         {
+                             var response = responseTask.Result;
+                             response.EnsureSuccessStatusCode();
+                             return response.Content.ReadFromJsonAsync<Order>();
+                         }).Unwrap();
+        }
     }
 }
