@@ -6,11 +6,11 @@
         xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:NorbitPizzaApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="MainWindow" Height="550" Width="980" Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
         <Grid>
             <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
             <Grid Height="70" Grid.Column="0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="0"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="auto"/>
@@ -31,7 +31,7 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15, 0">
-                    <Image Source="/Resources/logoOne.png" Width="100"></Image>
+                    <Image Source="/Resources/logoOne.png" Width="130"></Image>
                 </StackPanel>
 
                 <Border Grid.Column="2" CornerRadius="20" Padding="5" Margin="15" BorderBrush="LightGray" BorderThickness="1.5">
@@ -76,6 +76,7 @@
                             <RadioButton x:Name="RbSelectCategory" Content="{Binding CategoryName}" 
                                          Style="{StaticResource CategoryRadioButton}"
                                          GroupName="CategoriesGroup"
+                                         Margin="10 0 0 0"
                                          Click="RbSelectCategory_Click">
                             </RadioButton>
                         </DataTemplate>
@@ -116,9 +117,10 @@
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <RadioButton x:Name="RbIngridientDel" Content="{Binding IngredientName}" 
-                             Style="{StaticResource CategoryRadioButton}"
-                             GroupName="CategoriesGroup"
-                             Click="RbIngridientDel_Click">
+                                             Style="{StaticResource CategoryRadioButton}"
+                                             GroupName="CategoriesGroup"
+                                             Margin="3"
+                                             Click="RbIngridientDel_Click">
 
                                 </RadioButton>
                             </DataTemplate>
