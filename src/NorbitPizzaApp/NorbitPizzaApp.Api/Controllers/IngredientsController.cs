@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using NorbitPizzaApp.Api.Model;
 
 namespace NorbitPizzaApp.Api.Controllers;
@@ -11,6 +12,11 @@ public class IngredientsController : Controller
     public IngredientsController(NorbitPizzaContext context)
     {
         _context = context;
+    }
+    [HttpGet(Name = "GetIngredient")]
+    public async Task<IEnumerable<Ingredient>> Get()
+    {
+        return await _context.Ingredients.ToListAsync();
     }
     [HttpGet("{id}")]
     public ActionResult<IEnumerable<Ingredient>> GetIngredientsById(int id)

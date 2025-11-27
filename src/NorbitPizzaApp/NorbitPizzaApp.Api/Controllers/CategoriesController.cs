@@ -19,4 +19,16 @@ public class CategoriesController : Controller
     {
         return await _context.Categories.ToListAsync();
     }
+
+    [HttpGet("{id}")]
+    public ActionResult<IEnumerable<Category>> GetCategorysById(int id)
+    {
+        int?[] CategoryIds = _context.ProductCategories.Where(p => p.ProductId == id).Select(p => p.CategoryId).ToArray();
+        List<Category> categories = _context.Categories.Where(p => CategoryIds.Contains(p.CategoryId)).ToList();
+        if (categories.Count == 0)
+        {
+            return NotFound();
+        }
+        return categories;
+    }
 }

@@ -19,4 +19,15 @@ public class PizzaFormatController : Controller
     {
         return await _context.Formats.ToListAsync();
     }
+    [HttpGet("{id}")]
+    public ActionResult<IEnumerable<Format>> GetPizzaFormatsById(int id)
+    {
+        int?[] FormatsIds = _context.PizzaFormats.Where(p => p.PizzaId == id).Select(p => p.FormatId).ToArray();
+        List<Format> formats = _context.Formats.Where(p => FormatsIds.Contains(p.FormatId)).ToList();
+        if (formats.Count == 0)
+        {
+            return NotFound();
+        }
+        return formats;
+    }
 }
