@@ -6,8 +6,8 @@
         xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:NorbitPizzaApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="980" Loaded="Window_Loaded">
-    <Grid>
+        Title="MainWindow" Height="590" Width="1000" Loaded="Window_Loaded">
+    <Grid Background="#F9F3EA">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="300"/>
@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="20"/>
                     <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15, 0">
@@ -60,6 +60,13 @@
                         <TextBlock Margin="5" VerticalAlignment="Center" x:Name="TotalSumTb" Text=""></TextBlock>
                     </StackPanel>
                 </RadioButton>
+                <Button x:Name="BtnClearBasket" ToolTip="Очистить корзину" Background="Transparent" Grid.Column="5" BorderBrush="Transparent" Content="×" FontSize="20" Padding="-5" Height="20" Width="20" Margin="2">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="5"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
 
 
             </Grid>
@@ -76,7 +83,7 @@
                             <RadioButton x:Name="RbSelectCategory" Content="{Binding CategoryName}" 
                                          Style="{StaticResource CategoryRadioButton}"
                                          GroupName="CategoriesGroup"
-                                         Margin="10 0 0 0"
+                                         Margin="5 0 5 0"
                                          Click="RbSelectCategory_Click">
                             </RadioButton>
                         </DataTemplate>
@@ -139,7 +146,7 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border Background="White" CornerRadius="10" Width="200" Height="250" Padding="5" BorderThickness="1.5" BorderBrush="white" Margin="20 20 0 20">
+                            <Border Background="White" CornerRadius="10" Width="200" Height="260" Padding="8" BorderThickness="1.5" BorderBrush="white" Margin="20 20 0 20">
                                 <StackPanel>
                                     <Border Height="140" CornerRadius="10">
                                         <Border.Background>
@@ -150,21 +157,25 @@
                                     <TextBlock Text="{Binding ProductName}"
                                            FontSize="17"
                                            FontWeight="Bold"
-                                           Margin="0,0,0,4"/>
+                                           Margin="0,5,0,4"/>
 
                                     <TextBlock Text="{Binding Comment}"
                                            FontSize="13"
                                            TextWrapping="Wrap"
                                            Foreground="#FF666666"
                                            Margin="0,0,0,10"/>
+                                    <Border Height="0" VerticalAlignment="Stretch"/>
 
-                                    <StackPanel Orientation="Horizontal"
-                                            HorizontalAlignment="Stretch">
-                                        <TextBlock Text="{Binding BasePrice, StringFormat=₽{0}}"
+                                    <StackPanel Margin="0,8" Orientation="Horizontal"
+                                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            Text="{Binding BasePrice, StringFormat=₽{0}}"
                                                FontSize="16"
                                                FontWeight="Bold"/>
 
                                         <Button 
+                                            Margin="30,0,0,0"
                                             x:Name="OpenProductBtn"
                                             Click="OpenProductBtn_Click"
                                             Tag="{Binding}"
@@ -185,6 +196,7 @@
         <Border Visibility="Hidden" x:Name="DetailPanel"
                     CornerRadius="20"
                     Margin="20 50 20 50"
+                MaxHeight="460" 
             Grid.Column="1"
             Background="White"
             Padding="10">
@@ -196,13 +208,13 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
-                <Border Grid.Row="0" CornerRadius="10" Height="140">
+                <Border Grid.Row="0" CornerRadius="10" Height="150">
                     <Border.Background>
                         <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill"/>
                     </Border.Background>
                 </Border>
                 <StackPanel Grid.Row="1">
-                    <TextBlock Text="{Binding ProductName}"
+                    <TextBlock Margin="0 10 0 0" Text="{Binding ProductName}"
                        FontSize="20"
                        FontWeight="Bold"/>
                     <TextBlock Text="{Binding Comment}" Margin="0,5"/>
@@ -224,7 +236,7 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <RadioButton x:Name="FormatRadioBtn" Checked="FormatRadioBtn_Checked" Style="{StaticResource CategoryRadioButton}" GroupName="FormatsGroup" Padding="10,5">
+                                <RadioButton Margin="1" x:Name="FormatRadioBtn" Checked="FormatRadioBtn_Checked" Style="{StaticResource CategoryRadioButton}" GroupName="FormatsGroup" Padding="10,5">
                                     <StackPanel Orientation="Vertical" x:Name="StPanelss">
                                         <TextBlock Text="{Binding FormatName}" FontWeight="Bold" HorizontalAlignment="Center"/>
                                         <TextBlock>
