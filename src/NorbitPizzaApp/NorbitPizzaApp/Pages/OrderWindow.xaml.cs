@@ -56,6 +56,14 @@ namespace NorbitPizzaApp.Pages
 
             ApiService.PostOrderAsync(order);
 
+            foreach (var product in _listProducts)
+            {
+                ApiService.PostProductOrderAsync(new ProductOrder()
+                {
+                    BasketId = order.OrderId,
+                    ProductId = product.ProductId,         
+                });
+            }
 
 
         }

@@ -56,5 +56,16 @@ namespace NorbitPizzaApp.Classes.ApiLogic
                              return response.Content.ReadFromJsonAsync<Order>();
                          }).Unwrap();
         }
+
+        public static Task<ProductOrder> PostProductOrderAsync(ProductOrder order)
+        {
+            return client.PostAsJsonAsync("/ProductOrder", order)
+                         .ContinueWith(responseTask =>
+                         {
+                             var response = responseTask.Result;
+                             response.EnsureSuccessStatusCode();
+                             return response.Content.ReadFromJsonAsync<ProductOrder>();
+                         }).Unwrap();
+        }
     }
 }
