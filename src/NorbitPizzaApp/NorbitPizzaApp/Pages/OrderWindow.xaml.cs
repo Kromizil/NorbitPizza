@@ -23,5 +23,40 @@ namespace NorbitPizzaApp.Pages
         {
             InitializeComponent();
         }
+
+        //public decimal Total { get; set; }
+        //private int _basketId = 1;
+        //private readonly NorbitPizzaContext _context = new NorbitPizzaContext();
+        //public OrderPage()
+        //{
+        //    InitializeComponent();
+        //    DataContext = this;
+        //    LoadOrder();
+        //    LoadPaymentMethods();
+        //}
+
+        //private void LoadOrder()
+        //{
+        //    var items = _context.ProductOrders
+        //        .Where(po => po.BasketId == _basketId)
+        //        .Select(po => new
+        //        {
+        //            Name = po.Product.ProductName,
+        //            Count = po.Count,
+        //            Price = po.Product.BasePrice,
+        //            Total = po.Product.BasePrice * po.Count
+        //        })
+        //        .ToList();
+
+        //    OrderControl.ItemsSource = items;
+
+        //    Total = items.Sum(i => i.Total);
+        //}
+
+        //private void LoadPaymentMethods()
+        //{
+        //    var methods = _context.PaymentMethods.ToList();
+        //    PaymentMethodsControl.ItemsSource = methods;
+        //}
     }
 }

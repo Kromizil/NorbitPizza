@@ -43,6 +43,39 @@
                     </Setter.Value>
                 </Setter>
             </Style>
+            <Style TargetType="Button" x:Key="RoundedButton">
+                <Setter Property="Background" Value="White"/>
+                <Setter Property="BorderBrush" Value="#FFD0D0D0"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Padding" Value="8,4"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="border"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="15">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#FFF7F7F7"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="border" Property="Background" Value="#FFFFA726"/>
+                                    <Setter TargetName="border" Property="BorderBrush" Value="#FFFF9800"/>
+                                </Trigger>
+                                <Trigger Property="IsEnabled" Value="False">
+                                    <Setter TargetName="border" Property="Background" Value="#FFE0E0E0"/>
+                                    <Setter TargetName="border" Property="BorderBrush" Value="#FFD0D0D0"/>
+                                    <Setter Property="Foreground" Value="#FF888888"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
