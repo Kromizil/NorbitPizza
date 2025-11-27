@@ -148,9 +148,10 @@ namespace NorbitPizzaApp
 
         }
 
+        FormatDTO SelectedFormat = new FormatDTO();
         private void FormatRadioBtn_Checked(object sender, RoutedEventArgs e)
         {
-
+            SelectedFormat = (sender as RadioButton).DataContext as FormatDTO;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -215,6 +216,33 @@ namespace NorbitPizzaApp
             {
                 SetSelectedCategory(category);
             }
+        }
+        List<PartialProductBasketClass> basketClass = new List<PartialProductBasketClass>();
+        private void AddToBasket_Click(object sender, RoutedEventArgs e)
+        {
+
+            if(SelectedFormat  == null)
+            {
+                MessageBox.Show("Вы не выбрали формат!");
+                return;
+            }
+
+            var selectedProduct = (sender as Button).DataContext as ProductDto;
+
+            basketClass.Add(new PartialProductBasketClass()
+            {
+                ProductId = selectedProduct.ProductId,
+                ProductName = selectedProduct.ProductName,
+                Format = SelectedFormat
+            });
+
+
+            decimal totalSum = 0;
+            foreach (var basket in basketClass) 
+            {
+                totalSum += basket.Format.CalculatedPrice;
+            }
+            TotalSumTb.Text = $"{Math.Round(totalSum, 0)} р.";
         }
     }
 }

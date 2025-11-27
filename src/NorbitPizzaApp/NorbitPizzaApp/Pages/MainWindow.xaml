@@ -57,7 +57,7 @@
                 <RadioButton Style="{StaticResource CategoryRadioButton}" x:Name="RbBasket" Click="RbBasket_Click" Grid.Column="4" Background="White" Height="40">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/basket.png" Width="30"></Image>
-                        <TextBlock Text=""></TextBlock>
+                        <TextBlock x:Name="TotalSumTb" Text=""></TextBlock>
                     </StackPanel>
                 </RadioButton>
 
@@ -236,7 +236,7 @@
                     </ItemsControl>
                 </StackPanel>
 
-                <Button Grid.Row="4" Content="Добавить в корзину"
+                <Button x:Name="AddToBasket" Click="AddToBasket_Click" Grid.Row="4" Content="Добавить в корзину"
                     Background="#FFFFA726"
                     Foreground="White"
                     Padding="5"
