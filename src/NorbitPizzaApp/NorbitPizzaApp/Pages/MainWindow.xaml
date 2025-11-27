@@ -3,10 +3,242 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:NorbitPizzaApp"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <Grid Height="70" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="15, 0">
+                    <Image Source="/Resources/logoOne.png" Width="100"></Image>
+                </StackPanel>
+
+                <Border Grid.Column="2" CornerRadius="20" Padding="5" Margin="15" BorderBrush="LightGray" BorderThickness="1.5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="8*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image Source="/Resources/iconSearch.png" Height="25"></Image>
+                        <TextBox Grid.Column="1"
+                         MaterialDesign:HintAssist.Hint="Поиск пиццы"
+                         FontSize="14"
+                         BorderThickness="0"
+                         Background="Transparent"
+                         VerticalContentAlignment="Center"
+                         Text="{Binding SearchQuery}">
+                        </TextBox>
+                    </Grid>
+
+                </Border>
+
+                <RadioButton Style="{StaticResource CategoryRadioButton}" Grid.Column="4" Background="White" Height="40">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Resources/basket.png" Width="30"></Image>
+                        <TextBlock Text="р 850"></TextBlock>
+                    </StackPanel>
+                </RadioButton>
+
+
+            </Grid>
+
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
+                <ItemsControl x:Name="CategoriesItemsControl">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <RadioButton Content="{Binding CategoryName}" 
+                                         Style="{StaticResource CategoryRadioButton}"
+                                         GroupName="CategoriesGroup"
+                                         Click="RadioButton_Click">
+                            </RadioButton>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+
+
+                <ComboBox Background="White" 
+                      Padding="5"
+                      Margin="0 0 20 0"
+                      BorderThickness="1.5" 
+                      BorderBrush="LightGray" 
+                      Grid.Column="1" 
+                      SelectionChanged="ListIngridients_SelectionChanged"   
+                      x:Name="ListIngridients" 
+                      Panel.ZIndex="5" 
+                      DisplayMemberPath="IngredientName"
+                      IsEditable="True"
+                      Text="Ингредиент"
+                      IsReadOnly="True"
+                      MaterialDesign:TextFieldAssist.TextFieldCornerRadius="14">
+
+                </ComboBox>
+                <ScrollViewer Grid.Column="0" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled">
+                    <ItemsControl x:Name="IngredientsItemsControl">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton Content="{Binding IngredientName}" 
+                             Style="{StaticResource CategoryRadioButton}"
+                             GroupName="CategoriesGroup"
+                             Click="RadioButton_Click">
+
+                                </RadioButton>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+
+            <ScrollViewer Grid.Row="4">
+                <ItemsControl x:Name="ProductItemsControl">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Background="White" CornerRadius="10" Width="200" Height="250" Padding="5" BorderThickness="1.5" BorderBrush="white" Margin="20 20 0 20">
+                                <StackPanel>
+                                    <Border Height="140" CornerRadius="10">
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill"/>
+                                        </Border.Background>
+                                    </Border>
+
+                                    <TextBlock Text="{Binding ProductName}"
+                                           FontSize="17"
+                                           FontWeight="Bold"
+                                           Margin="0,0,0,4"/>
+
+                                    <TextBlock Text="{Binding Comment}"
+                                           FontSize="13"
+                                           TextWrapping="Wrap"
+                                           Foreground="#FF666666"
+                                           Margin="0,0,0,10"/>
+
+                                    <StackPanel Orientation="Horizontal"
+                                            HorizontalAlignment="Stretch">
+                                        <TextBlock Text="{Binding BasePrice, StringFormat=₽{0}}"
+                                               FontSize="16"
+                                               FontWeight="Bold"/>
+
+                                        <Button 
+                                            x:Name="OpenProductBtn"
+                                            Click="OpenProductBtn_Click"
+                                            Tag="{Binding}"
+                                            Content="Добавить"
+                                            Padding="10,4"
+                                            Background="#FFFFA726"
+                                            Foreground="White"
+                                            BorderThickness="0"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+
+        <Border x:Name="DetailPanel"
+                    CornerRadius="20"
+                    Margin="20 50 20 50"
+            Grid.Column="1"
+            Background="White"
+            Visibility="Visible"
+            Padding="10">
+            <Grid Height="auto">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Border Grid.Row="0" CornerRadius="10" Height="140">
+                    <Border.Background>
+                        <ImageBrush ImageSource="{Binding Image}" Stretch="UniformToFill"/>
+                    </Border.Background>
+                </Border>
+                <StackPanel Grid.Row="1">
+                    <TextBlock Text="{Binding ProductName}"
+                       FontSize="20"
+                       FontWeight="Bold"/>
+                    <TextBlock Text="{Binding Comment}" Margin="0,5"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <TextBlock FontWeight="Bold" Text="Ингредиенты:"/>
+                    <TextBlock Text="{Binding ProductIngredientsText}" TextWrapping="Wrap" Margin="0,5"/>
+                    <TextBlock x:Name="WeightTextBlock" Margin="0,5"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="3">
+                    <TextBlock Text="Размер:" FontWeight="SemiBold" Margin="0,10,0,5"/>
+
+                    <ItemsControl x:Name="FormatsItemsControl" Margin="0,5,0,0">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton x:Name="FormatRadioBtn" Checked="FormatRadioBtn_Checked" Style="{StaticResource CategoryRadioButton}" GroupName="FormatsGroup" Padding="10,5">
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Format.FormatName}" FontWeight="Bold" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Format.PriceMultiplier, StringFormat=₽{0:F0}}" HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </RadioButton>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+
+                <Button Grid.Row="4" Content="Добавить в корзину"
+                    Background="#FFFFA726"
+                    Foreground="White"
+                    Padding="5"
+                    Margin="0,20,0,0"/>
+            </Grid>
+        </Border>
     </Grid>
 </Window>

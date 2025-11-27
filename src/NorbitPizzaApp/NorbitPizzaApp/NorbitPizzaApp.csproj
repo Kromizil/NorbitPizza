@@ -9,9 +9,25 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\basket.png" />
+    <None Remove="Resources\iconSearch.png" />
+    <None Remove="Resources\logoOne.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\basket.png" />
+    <Resource Include="Resources\iconSearch.png" />
+    <Resource Include="Resources\logoOne.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Classes\Model\" />
     <Folder Include="Classes\BusinessLogic\" />
-    <Folder Include="Resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignColors" Version="5.3.0" />
+    <PackageReference Include="MaterialDesignThemes" Version="5.3.0" />
   </ItemGroup>
 
 </Project>
