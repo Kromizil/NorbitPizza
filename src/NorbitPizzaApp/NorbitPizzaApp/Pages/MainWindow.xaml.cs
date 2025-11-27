@@ -198,7 +198,11 @@ namespace NorbitPizzaApp
 
         private void RbBasket_Click(object sender, RoutedEventArgs e)
         {
-            OrderWindow orderWindow = new OrderWindow();
+            if(basketClass == null)
+            {
+                MessageBox.Show("Выберите продукт из списка!");
+            }
+            OrderWindow orderWindow = new OrderWindow(basketClass, _totalSum);
             orderWindow.ShowDialog();
         }
 
@@ -217,7 +221,8 @@ namespace NorbitPizzaApp
                 SetSelectedCategory(category);
             }
         }
-        List<PartialProductBasketClass> basketClass = new List<PartialProductBasketClass>();
+        private decimal _totalSum = 0;
+        private List<PartialProductBasketClass> basketClass = new List<PartialProductBasketClass>();
         private void AddToBasket_Click(object sender, RoutedEventArgs e)
         {
 
@@ -242,6 +247,7 @@ namespace NorbitPizzaApp
             {
                 totalSum += basket.Format.CalculatedPrice;
             }
+            _totalSum = totalSum;
             TotalSumTb.Text = $"{Math.Round(totalSum, 0)} р.";
         }
     }

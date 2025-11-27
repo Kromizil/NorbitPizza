@@ -1,4 +1,6 @@
-﻿using System;
+﻿using NorbitPizzaApp.Classes.Model;
+using NorbitPizzaApp.Classes.ModelsDto;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,10 +21,46 @@ namespace NorbitPizzaApp.Pages
     /// </summary>
     public partial class OrderWindow : Window
     {
-        public OrderWindow()
+        List<PartialProductBasketClass> _listProducts = new();
+        public OrderWindow(List<PartialProductBasketClass> listProducts, decimal totalSum)
         {
             InitializeComponent();
+            _listProducts = listProducts;
         }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            OrderControl.ItemsSource = _listProducts;
+        }
+
+        private void OrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if(string.IsNullOrWhiteSpace(TbAddress.Text) || string.IsNullOrWhiteSpace(TbName.Text))
+            {
+                MessageBox.Show("Заполните все поля!");
+            }
+            Order order = new Order()
+            {
+                Address = TbAddress.Text,
+                Name = TbName.Text,
+                Comment = TbComment.Text,
+                LastName = TbLastName.Text
+            };
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         //public decimal Total { get; set; }
         //private int _basketId = 1;
