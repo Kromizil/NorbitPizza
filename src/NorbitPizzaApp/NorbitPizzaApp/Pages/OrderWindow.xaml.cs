@@ -36,7 +36,7 @@ namespace NorbitPizzaApp.Pages
             OrderControl.ItemsSource = _listProducts;
         }
 
-        private void OrderBtn_Click(object sender, RoutedEventArgs e)
+        private async void OrderBtn_Click(object sender, RoutedEventArgs e)
         {
             if(string.IsNullOrWhiteSpace(TbAddress.Text) || string.IsNullOrWhiteSpace(TbName.Text) || string.IsNullOrWhiteSpace(TbPhone.Text))
             {
@@ -54,16 +54,20 @@ namespace NorbitPizzaApp.Pages
                 TotalPrice = Convert.ToDouble(_price)
             };
 
-            ApiService.PostOrderAsync(order);
+            var createdOrder = await ApiService.PostOrderAsync(order);
+
 
             foreach (var product in _listProducts)
             {
                 ApiService.PostProductOrderAsync(new ProductOrder()
                 {
-                    BasketId = order.OrderId,
-                    ProductId = product.ProductId,         
+                    BasketId = createdOrder.OrderId,
+                    ProductId = product.ProductId,
+                    Count = 1
                 });
             }
+
+            this.Close();
 
 
         }
