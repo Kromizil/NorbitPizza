@@ -16,8 +16,8 @@ namespace NorbitPizzaApp.Classes.Model
 
         public int Count { get; set; } = 1;
 
-        public virtual Order Basket { get; set; } = null!;
+        public virtual Order? Basket { get; set; }
 
-        public virtual Product Product { get; set; } = null!;
+        public virtual Product? Product { get; set; } 
     }
 }

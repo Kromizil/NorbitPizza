@@ -57,7 +57,7 @@
                 <RadioButton Style="{StaticResource CategoryRadioButton}" x:Name="RbBasket" Click="RbBasket_Click" Grid.Column="4" Background="White" Height="40">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="/Resources/basket.png" Width="30"></Image>
-                        <TextBlock x:Name="TotalSumTb" Text=""></TextBlock>
+                        <TextBlock Margin="5" VerticalAlignment="Center" x:Name="TotalSumTb" Text=""></TextBlock>
                     </StackPanel>
                 </RadioButton>
 
@@ -181,7 +181,7 @@
             </ScrollViewer>
         </Grid>
 
-        <Border Visibility="Visible" x:Name="DetailPanel"
+        <Border Visibility="Hidden" x:Name="DetailPanel"
                     CornerRadius="20"
                     Margin="20 50 20 50"
             Grid.Column="1"

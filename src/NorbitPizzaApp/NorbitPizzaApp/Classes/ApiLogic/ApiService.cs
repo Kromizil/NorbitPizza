@@ -14,7 +14,7 @@ namespace NorbitPizzaApp.Classes.ApiLogic
     {
         private static readonly HttpClient client = new HttpClient
         {
-            BaseAddress = new Uri("https://localhost:7084")
+            BaseAddress = new Uri("http://localhost:5066")
         };
 
         public static Task<List<Product>> GetProductsAsync()
@@ -48,7 +48,7 @@ namespace NorbitPizzaApp.Classes.ApiLogic
         }
         public static Task<Order> PostOrderAsync(Order order)
         {
-            return client.PostAsJsonAsync("/Orders", order)
+            return client.PostAsJsonAsync("/Order", order)
                          .ContinueWith(responseTask =>
                          {
                              var response = responseTask.Result;

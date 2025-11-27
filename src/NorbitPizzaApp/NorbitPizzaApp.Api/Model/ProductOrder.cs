@@ -13,7 +13,7 @@ public partial class ProductOrder
 
     public int Count { get; set; }
 
-    public virtual Order Basket { get; set; } = null!;
+    public virtual Order? Basket { get; set; }
 
-    public virtual Product Product { get; set; } = null!;
+    public virtual Product? Product { get; set; } 
 }

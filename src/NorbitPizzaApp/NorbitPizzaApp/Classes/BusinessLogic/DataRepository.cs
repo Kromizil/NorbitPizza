@@ -33,7 +33,7 @@ namespace NorbitPizzaApp.Classes.BusinessLogic
         {
             try
             {
-                using var client = new HttpClient { BaseAddress = new Uri("https://localhost:7084") };
+                using var client = new HttpClient { BaseAddress = new Uri("http://localhost:5066") };
                 var response = await client.GetAsync("/Pizza");
                 return response.IsSuccessStatusCode;
             }

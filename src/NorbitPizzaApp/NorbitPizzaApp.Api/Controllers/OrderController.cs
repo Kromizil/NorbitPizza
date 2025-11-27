@@ -9,38 +9,29 @@ namespace NorbitPizzaApp.Api.Controllers;
 public class OrderController : Controller
 {
     private readonly NorbitPizzaContext _context;
+
     public OrderController(NorbitPizzaContext context)
     {
         _context = context;
     }
+
+    [HttpGet("{id}", Name = "GetVacationById")]
+    public async Task<ActionResult<Order>> GetVacation(int id)
+    {
+        var order = await _context.Orders.FindAsync(id);
+        if (order == null) return NotFound();
+        return order;
+    }
+
     [HttpPost]
     public async Task<ActionResult<Order>> PostVacation(Order order)
     {
         if (_context.Orders == null)
-        {
-            return Problem("Entity set 'NorbitPizzaApp.Orders'  is null.");
-        }
-        _context.Orders.Add(order);
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateException)
-        {
-            if (OrderExists(order.OrderId))
-            {
-                return Conflict();
-            }
-            else
-            {
-                throw;
-            }
-        }
+            return Problem("Entity set 'NorbitPizzaApp.Orders' is null.");
 
-        return CreatedAtAction("GetVacation", new { id = order.OrderId }, order);
-    }
-    private bool OrderExists(int id)
-    {
-        return (_context.Orders?.Any(e => e.OrderId == id)).GetValueOrDefault();
+        _context.Orders.Add(order);
+        await _context.SaveChangesAsync();
+
+        return CreatedAtRoute("GetVacationById", new { id = order.OrderId }, order);
     }
 }
