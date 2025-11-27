@@ -145,7 +145,7 @@ namespace NorbitPizzaApp
 
             DetailPanel.DataContext = product;
             DetailPanel.Visibility = Visibility.Visible;
-
+            SelectedFormat = new FormatDTO();
         }
 
         FormatDTO SelectedFormat = new FormatDTO();
@@ -221,18 +221,20 @@ namespace NorbitPizzaApp
                 SetSelectedCategory(category);
             }
         }
+
+
         private decimal _totalSum = 0;
         private List<PartialProductBasketClass> basketClass = new List<PartialProductBasketClass>();
         private void AddToBasket_Click(object sender, RoutedEventArgs e)
         {
+            var selectedProduct = (sender as Button).DataContext as ProductDto;
 
-            if(SelectedFormat  == null)
+
+            if (SelectedFormat.FormatName  == null)
             {
                 MessageBox.Show("Вы не выбрали формат!");
                 return;
             }
-
-            var selectedProduct = (sender as Button).DataContext as ProductDto;
 
             basketClass.Add(new PartialProductBasketClass()
             {

@@ -6,7 +6,7 @@
         xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:NorbitPizzaApp.Pages"
         mc:Ignorable="d"
-        Title="OrderWindow" Height="520" Width="270" MaxHeight="500"
+        Title="OrderWindow" Height="520" Width="270" 
 MaxWidth="270" Loaded="Window_Loaded">
     <Grid Background="#F2F2F2">
         <Border Padding="10" CornerRadius="10" Background="White" Margin="20">
@@ -61,7 +61,7 @@ MaxWidth="270" Loaded="Window_Loaded">
                 <Separator Background="LightGray"  Grid.Row="2" VerticalAlignment="Top"/>
                 <StackPanel Margin="0, 0, 0, 10" Grid.Row="2" VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock Text="Общая стоимость:  " FontSize="15" FontWeight="DemiBold"></TextBlock>
-                    <TextBlock Text="{Binding Total}" FontSize="15"/>
+                    <TextBlock  x:Name="TotalPriceTb" FontSize="15"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3">
                     <Grid>

@@ -29,6 +29,7 @@ namespace NorbitPizzaApp.Pages
             InitializeComponent();
             _listProducts = listProducts;
             _price = totalSum;
+            TotalPriceTb.Text = $"{Math.Round(totalSum,2)} р.";
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
