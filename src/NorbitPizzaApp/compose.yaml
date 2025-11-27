@@ -7,14 +7,23 @@
     environment:
       ASPNETCORE_HTTP_PORTS: '5066'
       ASPNETCORE_ENVIRONMENT: 'Development'
+    networks:
+      - static-network
     ports:
       - 5066:5066
   sql-server:
     image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
       ACCEPT_EULA: 'Y'
+    networks:
+      static-network:
+        ipv4_address: 192.168.240.5
     ports:
       - 1433:1433
     volumes:
       - ./data:/var/opt/mssql/data/
-
+networks:
+    static-network:
+      ipam:
+        config:
+          - subnet: 192.168.240.0/24
