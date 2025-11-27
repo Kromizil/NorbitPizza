@@ -48,7 +48,7 @@
                          BorderThickness="0"
                          Background="Transparent"
                          VerticalContentAlignment="Center"
-                         Text="{Binding SearchQuery}">
+                         Text="{Binding SearchQuery, UpdateSourceTrigger=PropertyChanged}">
                         </TextBox>
                     </Grid>
 
@@ -73,10 +73,10 @@
                     </ItemsControl.ItemsPanel>
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <RadioButton Content="{Binding CategoryName}" 
+                            <RadioButton x:Name="RbSelectCategory" Content="{Binding CategoryName}" 
                                          Style="{StaticResource CategoryRadioButton}"
                                          GroupName="CategoriesGroup"
-                                         Click="RadioButton_Click">
+                                         Click="RbSelectCategory_Click">
                             </RadioButton>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
@@ -115,10 +115,10 @@
                         </ItemsControl.ItemsPanel>
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <RadioButton Content="{Binding IngredientName}" 
+                                <RadioButton x:Name="RbIngridientDel" Content="{Binding IngredientName}" 
                              Style="{StaticResource CategoryRadioButton}"
                              GroupName="CategoriesGroup"
-                             Click="RadioButton_Click">
+                             Click="RbIngridientDel_Click">
 
                                 </RadioButton>
                             </DataTemplate>

@@ -3,6 +3,7 @@ using NorbitPizzaApp.Classes.Model;
 using NorbitPizzaApp.Classes.ModelsDto;
 using NorbitPizzaApp.Pages;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -26,19 +27,86 @@ namespace NorbitPizzaApp
 
         public ObservableCollection<Ingredient> _Ingredient { get; } = new ObservableCollection<Ingredient>();
         public ObservableCollection<ProductDto> _Product { get; } = new ObservableCollection<ProductDto>();
-        public ObservableCollection<ProductDto> _ChangebleProduct { get; } = new ObservableCollection<ProductDto>();
+        public ObservableCollection<ProductDto> _ChangebleProduct { get; set; } = new ObservableCollection<ProductDto>();
         public ObservableCollection<CategoryDto> _Categories { get; } = new ObservableCollection<CategoryDto>();
 
+
+        private CategoryDto _selectedCategory;
+
+        private string _searchQuery;
+        public string SearchQuery
+        {
+            get => _searchQuery;
+            set
+            {
+                _searchQuery = value;
+                ApplyFilter();
+            }
+        }
 
 
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
         private void RadioButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        public void SetSelectedCategory(CategoryDto category)
+        {
+            _selectedCategory = category;
+            ApplyFilter();
+        }
+
+        private void ApplyFilter()
+        {
+            if (ProductItemsControl == null)
+                return;
+
+            var filtered = _Product.Where(p =>
+            {
+                if (_selectedCategory != null &&
+                    !string.Equals(_selectedCategory.CategoryName, "Все", StringComparison.OrdinalIgnoreCase))
+                {
+                    if (p.Categories == null ||
+                        !p.Categories.Any(ct => string.Equals(ct.CategoryName, _selectedCategory.CategoryName, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        return false;
+                    }
+                }
+
+                if (!string.IsNullOrWhiteSpace(SearchQuery))
+                {
+                    if (string.IsNullOrEmpty(p.ProductName) ||
+                        p.ProductName.IndexOf(SearchQuery, StringComparison.OrdinalIgnoreCase) < 0)
+                    {
+                        return false;
+                    }
+                }
+
+                if (CurrentIngr != null && CurrentIngr.Count > 0)
+                {
+                    if (p.Ingredients == null)
+                        return false;
+
+                    bool allIngredientsPresent = CurrentIngr.All(ci =>
+                        p.Ingredients.Any(pi => pi.IngredientId == ci.IngredientId));
+                    if (!allIngredientsPresent)
+                        return false;
+                }
+
+                return true;
+            });
+
+            _ChangebleProduct.Clear();
+            foreach (var item in filtered)
+                _ChangebleProduct.Add(item);
+
+            ProductItemsControl.ItemsSource = _ChangebleProduct;
         }
 
 
@@ -56,6 +124,7 @@ namespace NorbitPizzaApp
             {
                 CurrentIngr.Add(ingredient);
                 LoadIngredients();
+                ApplyFilter();
             }
         }
         private void LoadIngredients()
@@ -100,6 +169,8 @@ namespace NorbitPizzaApp
             foreach (var categorys in data.Category)
                 _Categories.Add(categorys);
 
+            _Categories.Add(new CategoryDto { CategoryName = "Все" });
+
             LoadProduct();
             Ingridients();
             LoadCategory();
@@ -112,7 +183,10 @@ namespace NorbitPizzaApp
 
         private void LoadProduct()
         {
-            ProductItemsControl.ItemsSource = _Product.ToList();
+            _ChangebleProduct.Clear();
+            foreach (var item in _Product)
+                _ChangebleProduct.Add(item);
+            ProductItemsControl.ItemsSource = _ChangebleProduct;
         }
 
         private void Ingridients()
@@ -127,103 +201,20 @@ namespace NorbitPizzaApp
             orderWindow.ShowDialog();
         }
 
-        //private Product _currentProduct;
-        //private readonly NorbitPizzaContext _context = new NorbitPizzaContext();
-        //public MainPage()
-        //{
-        //    InitializeComponent();
-        //    LoadCategories();
-        //    //   LoadIngredients();
-        //    Ingridients();
-        //    LoadProduct();
-        //}
+        private void RbIngridientDel_Click(object sender, RoutedEventArgs e)
+        {
+            CurrentIngr.Remove((sender as RadioButton).DataContext as Ingredient);
+            LoadIngredients();
+            ApplyFilter();
+        }
 
-        //private void Ingridients()
-        //{
-        //    using (var context = new NorbitPizzaContext())
-        //    {
-        //        var inggridients = context.Ingredients.ToList();
-        //        //inggridients.Insert(0, new Ingredient { IngredientId = 0, IngredientName = "Выберите категорию" });
-        //        ListIngridients.ItemsSource = inggridients;
-        //        // ListIngridients.SelectedIndex = 0; // по умолчанию выбран первый
-        //    }
-        //}
-
-        //private void LoadProduct()
-        //{
-        //    ProductItemsControl.ItemsSource = _context.Products.ToList();
-        //}
-
-        //private void LoadCategories()
-        //{
-        //    CategoriesItemsControl.ItemsSource = _context.Categories.ToList();
-        //}
-
-        //private void LoadIngredients()
-        //{
-
-        //    if (IngredientsItemsControl.ItemsSource == null)
-        //        IngredientsItemsControl.ItemsSource = CurrentIngr;
-
-
-        //}
-
-        //private void RadioButton_Click(object sender, RoutedEventArgs e)
-        //{
-
-        //}
-
-        //ObservableCollection<Ingredient> CurrentIngr = new ObservableCollection<Ingredient>();
-        //private void ListIngridients_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    if (e.AddedItems.Count == 0)
-        //        return;
-
-        //    Ingredient ingredient = e.AddedItems[0] as Ingredient;
-        //    if (ingredient == null)
-        //        return;
-
-        //    if (!CurrentIngr.Contains(ingredient))
-        //    {
-        //        CurrentIngr.Add(ingredient);
-        //        LoadIngredients();
-        //    }
-        //}
-
-        //private void ListIngridients_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        //{
-
-        //}
-
-        //private void OpenProductBtn_Click(object sender, RoutedEventArgs e)
-        //{
-        //    
-
-        //    
-        //    
-        //    
-        //    
-        //    
-        //    
-
-        //    
-        //    
-        //    
-        //    
-
-        //    
-        //    
-        //    
-        //    
-        //}
-
-        //private PizzaFormat _selectedFormat;
-        //private void FormatRadioBtn_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    _selectedFormat = (sender as RadioButton)?.DataContext as PizzaFormat;
-
-        //    if (_selectedFormat != null)
-        //        WeightTextBlock.Text = $"Вес: {_selectedFormat.Weight} г";
-        //}
+        private void RbSelectCategory_Click(object sender, RoutedEventArgs e)
+        {
+            var category = (sender as RadioButton)?.DataContext as CategoryDto;
+            if (category != null)
+            {
+                SetSelectedCategory(category);
+            }
+        }
     }
 }
