@@ -67,5 +67,10 @@ namespace NorbitPizzaApp.Classes.ApiLogic
                              return response.Content.ReadFromJsonAsync<ProductOrder>();
                          }).Unwrap();
         }
+
+        public static Task<List<PaymentMethodDto>> GetPaymentMethodsAsync()
+        {
+            return client.GetFromJsonAsync<List<PaymentMethodDto>>("/PaymentMethod");
+        }
     }
 }

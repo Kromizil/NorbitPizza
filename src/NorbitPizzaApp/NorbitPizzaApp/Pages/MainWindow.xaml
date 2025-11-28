@@ -6,7 +6,7 @@
         xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:NorbitPizzaApp"
         mc:Ignorable="d"
-        Title="MainWindow" Height="590" Width="1000" Loaded="Window_Loaded">
+        Title="MainWindow" Height="590" Width="1000" MinHeight="590" MinWidth="1000" Loaded="Window_Loaded">
     <Grid Background="#F9F3EA">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
@@ -60,7 +60,7 @@
                         <TextBlock Margin="5" VerticalAlignment="Center" x:Name="TotalSumTb" Text=""></TextBlock>
                     </StackPanel>
                 </RadioButton>
-                <Button x:Name="BtnClearBasket" ToolTip="Очистить корзину" Background="Transparent" Grid.Column="5" BorderBrush="Transparent" Content="×" FontSize="20" Padding="-5" Height="20" Width="20" Margin="2">
+                <Button x:Name="BtnClearBasket" Click="BtnClearBasket_Click" ToolTip="Очистить корзину" Background="Transparent" Grid.Column="5" BorderBrush="Transparent" Content="×" FontSize="20" Padding="-5" Height="20" Width="20" Margin="2">
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
@@ -83,7 +83,9 @@
                             <RadioButton x:Name="RbSelectCategory" Content="{Binding CategoryName}" 
                                          Style="{StaticResource CategoryRadioButton}"
                                          GroupName="CategoriesGroup"
-                                         Margin="5 0 5 0"
+                                         Height="35 "
+                                         MinWidth="70"
+                                         Margin="5 0 0 0"
                                          Click="RbSelectCategory_Click">
                             </RadioButton>
                         </DataTemplate>

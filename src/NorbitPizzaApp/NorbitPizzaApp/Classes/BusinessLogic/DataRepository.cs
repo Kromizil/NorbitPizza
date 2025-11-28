@@ -48,7 +48,7 @@ namespace NorbitPizzaApp.Classes.BusinessLogic
             var products = await ApiService.GetProductsAsync();
             var ingredients = await ApiService.GetIngredientsAsync();
             var category = await ApiService.GetCategorysAsync();
-
+            var paymentMethod = await ApiService.GetPaymentMethodsAsync();
 
             var pizzas = new List<ProductDto>();
             foreach (var product in products)
@@ -79,7 +79,8 @@ namespace NorbitPizzaApp.Classes.BusinessLogic
             {
                 Pizzas = pizzas,
                 Ingredients = ingredients,
-                Category = category
+                Category = category,
+                paymentMethod = paymentMethod
             };
         }
 

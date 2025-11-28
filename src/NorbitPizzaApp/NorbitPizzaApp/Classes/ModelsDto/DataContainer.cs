@@ -12,6 +12,7 @@ namespace NorbitPizzaApp.Classes.ModelsDto
         public List<ProductDto> Pizzas { get; set; } = new();
         public List<Ingredient> Ingredients { get; set; } = new();
         public List<CategoryDto> Category { get; set; } = new();
+        public List<PaymentMethodDto> paymentMethod { get; set; } = new();
 
     }
 }

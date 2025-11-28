@@ -29,6 +29,7 @@ namespace NorbitPizzaApp
         public ObservableCollection<ProductDto> _Product { get; } = new ObservableCollection<ProductDto>();
         public ObservableCollection<ProductDto> _ChangebleProduct { get; set; } = new ObservableCollection<ProductDto>();
         public ObservableCollection<CategoryDto> _Categories { get; } = new ObservableCollection<CategoryDto>();
+        public ObservableCollection<PaymentMethodDto> _PaymentMethod { get; } = new ObservableCollection<PaymentMethodDto>();
 
 
         private CategoryDto _selectedCategory;
@@ -169,8 +170,14 @@ namespace NorbitPizzaApp
             _Categories.Clear();
             foreach (var categorys in data.Category)
                 _Categories.Add(categorys);
-
             _Categories.Add(new CategoryDto { CategoryName = "Все" });
+
+
+            _PaymentMethod.Clear();
+            foreach (var method in data.paymentMethod)
+                _PaymentMethod.Add(method);
+
+
 
             LoadProduct();
             Ingridients();
@@ -202,7 +209,12 @@ namespace NorbitPizzaApp
             {
                 MessageBox.Show("Выберите продукт из списка!");
             }
-            OrderWindow orderWindow = new OrderWindow(basketClass, _totalSum);
+            decimal basketSum = 0;
+            foreach(var basket in basketClass)
+            {
+                basketSum += basket.Format.CalculatedPrice;
+            }
+            OrderWindow orderWindow = new OrderWindow(basketClass, basketSum, _PaymentMethod.ToList());
             orderWindow.ShowDialog();
         }
 
@@ -251,6 +263,14 @@ namespace NorbitPizzaApp
             }
             _totalSum = totalSum;
             TotalSumTb.Text = $"{Math.Round(totalSum, 0)} р.";
+        }
+
+        private void BtnClearBasket_Click(object sender, RoutedEventArgs e)
+        {
+            _totalSum = 0;
+            basketClass.Clear();
+            TotalSumTb.Text = string.Empty;
+            RbBasket.IsChecked = false;
         }
     }
 }

@@ -3,6 +3,7 @@ using NorbitPizzaApp.Classes.Model;
 using NorbitPizzaApp.Classes.ModelsDto;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,24 +23,29 @@ namespace NorbitPizzaApp.Pages
     /// </summary>
     public partial class OrderWindow : Window
     {
+
         List<PartialProductBasketClass> _listProducts = new();
         decimal _price = 0;
-        public OrderWindow(List<PartialProductBasketClass> listProducts, decimal totalSum)
+        private PaymentMethodDto currentMethod = new();
+
+        public OrderWindow(List<PartialProductBasketClass> listProducts, decimal totalSum, List<PaymentMethodDto> paymentMethods)
         {
             InitializeComponent();
             _listProducts = listProducts;
             _price = totalSum;
-            TotalPriceTb.Text = $"{Math.Round(totalSum,2)} р.";
+            TotalPriceTb.Text = $"{Math.Round(totalSum, 2)} р.";
+            PaymentMethodsControl.ItemsSource = paymentMethods.ToList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+
             OrderControl.ItemsSource = _listProducts;
         }
 
         private async void OrderBtn_Click(object sender, RoutedEventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(TbAddress.Text) || string.IsNullOrWhiteSpace(TbName.Text) || string.IsNullOrWhiteSpace(TbPhone.Text))
+            if(string.IsNullOrWhiteSpace(TbAddress.Text) || string.IsNullOrWhiteSpace(TbName.Text) || string.IsNullOrWhiteSpace(TbPhone.Text) || currentMethod.PaymentMethodId == 0)
             {
                 MessageBox.Show("Заполните все поля!");
             }
@@ -52,7 +58,8 @@ namespace NorbitPizzaApp.Pages
                 Phone = TbPhone.Text,
                 CreatedAt = DateTime.Now,
                 IsPickup = CbIsPickUp.IsChecked,
-                TotalPrice = Convert.ToDouble(_price)
+                TotalPrice = Convert.ToDouble(_price),
+                PaymentMethod = currentMethod.PaymentMethodId
             };
 
             var createdOrder = await ApiService.PostOrderAsync(order);
@@ -73,53 +80,24 @@ namespace NorbitPizzaApp.Pages
 
         }
 
+        private void BtnDelProd_Click(object sender, RoutedEventArgs e)
+        {
+            var product = (sender as Button).DataContext as PartialProductBasketClass;
+            _listProducts.Remove(product);
+            OrderControl.ItemsSource = _listProducts;
+            OrderControl.Items.Refresh();
+            _price -= product.Format.CalculatedPrice;
+            TotalPriceTb.Text = $"{Math.Round(_price, 2)} р.";
+
+        }
+
+
+        private void RbPayment_Checked(object sender, RoutedEventArgs e)
+        {
+            currentMethod = (sender as RadioButton).DataContext as PaymentMethodDto;
+        }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-        //public decimal Total { get; set; }
-        //private int _basketId = 1;
-        //private readonly NorbitPizzaContext _context = new NorbitPizzaContext();
-        //public OrderPage()
-        //{
-        //    InitializeComponent();
-        //    DataContext = this;
-        //    LoadOrder();
-        //    LoadPaymentMethods();
-        //}
-
-        //private void LoadOrder()
-        //{
-        //    var items = _context.ProductOrders
-        //        .Where(po => po.BasketId == _basketId)
-        //        .Select(po => new
-        //        {
-        //            Name = po.Product.ProductName,
-        //            Count = po.Count,
-        //            Price = po.Product.BasePrice,
-        //            Total = po.Product.BasePrice * po.Count
-        //        })
-        //        .ToList();
-
-        //    OrderControl.ItemsSource = items;
-
-        //    Total = items.Sum(i => i.Total);
-        //}
-
-        //private void LoadPaymentMethods()
-        //{
-        //    var methods = _context.PaymentMethods.ToList();
-        //    PaymentMethodsControl.ItemsSource = methods;
-        //}
     }
 }
