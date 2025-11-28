@@ -3,6 +3,7 @@ using NorbitPizzaApp.Classes.Model;
 using NorbitPizzaApp.Classes.ModelsDto;
 using NorbitPizzaApp.Pages;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -155,6 +156,8 @@ namespace NorbitPizzaApp
             SelectedFormat = (sender as RadioButton).DataContext as FormatDTO;
         }
 
+
+
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var data = await _repository.LoadDataAsync();
@@ -271,6 +274,51 @@ namespace NorbitPizzaApp
             basketClass.Clear();
             TotalSumTb.Text = string.Empty;
             RbBasket.IsChecked = false;
+        }
+
+        private  void CbChangeLenguage_Checked(object sender, RoutedEventArgs e)
+        {
+            CbChangeLenguage.Content = "Язык: Криптанский";
+            DetailPanel.Visibility = Visibility.Hidden;
+            ListIngridients.Text = "Ингредиент";
+            CurrentIngr.Clear();
+            var data =  _repository.LoadTranslation();
+
+            _Product.Clear();
+            foreach (var pizza in data.Pizzas)
+                _Product.Add(pizza);
+
+            _Ingredient.Clear();
+            foreach (var ingrid in data.Ingredients)
+                _Ingredient.Add(ingrid);
+
+            _Categories.Clear();
+            foreach (var categorys in data.Category)
+                _Categories.Add(categorys);
+            _Categories.Add(new CategoryDto { CategoryName = "Все" });
+
+
+            _PaymentMethod.Clear();
+            foreach (var method in data.paymentMethod)
+                _PaymentMethod.Add(method);
+
+
+
+            LoadProduct();
+            Ingridients();
+            LoadCategory();
+        }
+
+        private async void CbChangeLenguage_Unchecked(object sender, RoutedEventArgs e)
+        {
+            ListIngridients.Text = "Ингредиент";
+            CurrentIngr.Clear();
+            CbChangeLenguage.Content = "Язык: Русский";
+            DetailPanel.Visibility = Visibility.Hidden;
+            Window_Loaded(null, null);
+            this.IsEnabled = false;
+            await Task.Delay(2000);
+            this.IsEnabled = true;
         }
     }
 }

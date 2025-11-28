@@ -25,4 +25,10 @@
     <PackageReference Include="MaterialDesignThemes" Version="5.3.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\pizza_dataCRYPTO.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

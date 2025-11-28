@@ -90,6 +90,13 @@ namespace NorbitPizzaApp.Classes.BusinessLogic
             File.WriteAllText(CacheFilePath, json);
         }
 
+        public  DataContainer? LoadTranslation()
+        {
+            if (!File.Exists("Resources\\pizza_dataCRYPTO.json")) return null;
+            var json = File.ReadAllText("Resources\\pizza_dataCRYPTO.json");
+            return JsonSerializer.Deserialize<DataContainer>(json);
+        }
+
         private DataContainer? LoadFromCache()
         {
             if (!File.Exists(CacheFilePath)) return null;

@@ -1,0 +1,372 @@
+{
+  "Pizzas": [
+    {
+      "ProductId": 1,
+      "ProductName": "ШиллМяс",
+      "Comment": "Максимально мясная нода для тех, кто холдит даже просадку.",
+      "Image": "https://i.ibb.co/tPX7ztmc/Meet.png",
+      "BasePrice": 400.00,
+      "ProductType": 0,
+      "ImageName": null,
+      "Title": null,
+      "StringIngredient": "лук-газ, моцца-холд, томасоус, чикен-холд, пеппер-лонг",
+      "Ingredients": [
+        {
+          "IngredientId": 1,
+          "IngredientName": "Лук-Газ"
+        },
+        {
+          "IngredientId": 2,
+          "IngredientName": "МоццаХолд"
+        },
+        {
+          "IngredientId": 4,
+          "IngredientName": "ТомаСоус"
+        },
+        {
+          "IngredientId": 6,
+          "IngredientName": "ЧикенХолд"
+        },
+        {
+          "IngredientId": 10,
+          "IngredientName": "ПепперЛонг"
+        }
+      ],
+      "Categories": [
+        {
+          "CategoryId": 1,
+          "CategoryName": "ХитНета"
+        },
+        {
+          "CategoryId": 2,
+          "CategoryName": "МясДеген"
+        }
+      ],
+      "Formats": [
+        {
+          "FormatId": 1,
+          "FormatName": "МалХолд",
+          "PriceMultiplier": 1.000,
+          "CalculatedPrice": 400.00000
+        },
+        {
+          "FormatId": 2,
+          "FormatName": "СрДеген",
+          "PriceMultiplier": 1.500,
+          "CalculatedPrice": 600.00000
+        },
+        {
+          "FormatId": 3,
+          "FormatName": "БигАпе",
+          "PriceMultiplier": 1.800,
+          "CalculatedPrice": 720.00000
+        }
+      ]
+    },
+    {
+      "ProductId": 3,
+      "ProductName": "ЧизБуст",
+      "Comment": "Топовая сырная нода, плавится как депозит на хаях.",
+      "Image": "https://i.ibb.co/JFv5G23G/Cheese.png",
+      "BasePrice": 350.00,
+      "ProductType": 0,
+      "ImageName": null,
+      "Title": null,
+      "StringIngredient": "моцца-холд, томасоус, парм-буст",
+      "Ingredients": [
+        {
+          "IngredientId": 2,
+          "IngredientName": "МоццаХолд"
+        },
+        {
+          "IngredientId": 4,
+          "IngredientName": "ТомаСоус"
+        },
+        {
+          "IngredientId": 5,
+          "IngredientName": "ПармБуст"
+        }
+      ],
+      "Categories": [
+        {
+          "CategoryId": 1,
+          "CategoryName": "ХитНета"
+        },
+        {
+          "CategoryId": 3,
+          "CategoryName": "СырБуст"
+        }
+      ],
+      "Formats": [
+        {
+          "FormatId": 1,
+          "FormatName": "МалХолд",
+          "PriceMultiplier": 1.000,
+          "CalculatedPrice": 350.00000
+        },
+        {
+          "FormatId": 2,
+          "FormatName": "СрДеген",
+          "PriceMultiplier": 1.500,
+          "CalculatedPrice": 525.00000
+        },
+        {
+          "FormatId": 3,
+          "FormatName": "БигАпе",
+          "PriceMultiplier": 1.800,
+          "CalculatedPrice": 630.00000
+        }
+      ]
+    },
+    {
+      "ProductId": 5,
+      "ProductName": "ЧикЛонг",
+      "Comment": "Куриная хард-нода: сочная, дерзкая и идёт только в лонг!",
+      "Image": "https://i.ibb.co/Q3HMHFvB/Chicken.png",
+      "BasePrice": 500.00,
+      "ProductType": 0,
+      "ImageName": null,
+      "Title": null,
+      "StringIngredient": "томасоус, парм-буст, чикен-холд, шамп-лонг",
+      "Ingredients": [
+        {
+          "IngredientId": 4,
+          "IngredientName": "ТомаСоус"
+        },
+        {
+          "IngredientId": 5,
+          "IngredientName": "ПармБуст"
+        },
+        {
+          "IngredientId": 6,
+          "IngredientName": "ЧикенХолд"
+        },
+        {
+          "IngredientId": 9,
+          "IngredientName": "ШампЛонг"
+        }
+      ],
+      "Categories": [
+        {
+          "CategoryId": 3,
+          "CategoryName": "СырБуст"
+        }
+      ],
+      "Formats": [
+        {
+          "FormatId": 1,
+          "FormatName": "МалХолд",
+          "PriceMultiplier": 1.000,
+          "CalculatedPrice": 500.00000
+        },
+        {
+          "FormatId": 2,
+          "FormatName": "СрДеген",
+          "PriceMultiplier": 1.500,
+          "CalculatedPrice": 750.00000
+        },
+        {
+          "FormatId": 3,
+          "FormatName": "БигАпе",
+          "PriceMultiplier": 1.800,
+          "CalculatedPrice": 900.00000
+        }
+      ]
+    },
+    {
+      "ProductId": 6,
+      "ProductName": "МаржаРита",
+      "Comment": "Чистая соусная маржа, расплывается как ликвидность на пампе.",
+      "Image": "https://i.ibb.co/rGztPDB9/Margarittta.png",
+      "BasePrice": 360.00,
+      "ProductType": 0,
+      "ImageName": null,
+      "Title": null,
+      "StringIngredient": "лук-газ, моцца-холд, томаты, томасоус",
+      "Ingredients": [
+        {
+          "IngredientId": 1,
+          "IngredientName": "Лук-Газ"
+        },
+        {
+          "IngredientId": 2,
+          "IngredientName": "МоццаХолд"
+        },
+        {
+          "IngredientId": 3,
+          "IngredientName": "Томаты"
+        },
+        {
+          "IngredientId": 4,
+          "IngredientName": "ТомаСоус"
+        }
+      ],
+      "Categories": [
+        {
+          "CategoryId": 4,
+          "CategoryName": "ОвощДег"
+        }
+      ],
+      "Formats": [
+        {
+          "FormatId": 1,
+          "FormatName": "МалХолд",
+          "PriceMultiplier": 1.000,
+          "CalculatedPrice": 360.00000
+        },
+        {
+          "FormatId": 2,
+          "FormatName": "СрДеген",
+          "PriceMultiplier": 1.500,
+          "CalculatedPrice": 540.00000
+        },
+        {
+          "FormatId": 3,
+          "FormatName": "БигАпе",
+          "PriceMultiplier": 1.800,
+          "CalculatedPrice": 648.00000
+        }
+      ]
+    },
+    {
+      "ProductId": 7,
+      "ProductName": "ПепперАп",
+      "Comment": "Острая колбасная нода — откаты не признаёт, только ап.",
+      "Image": "https://i.ibb.co/bYLDR4X/Peperoni.png",
+      "BasePrice": 400.00,
+      "ProductType": 0,
+      "ImageName": null,
+      "Title": null,
+      "StringIngredient": "томаты, томасоус, огурчики, пеппер-лонг",
+      "Ingredients": [
+        {
+          "IngredientId": 3,
+          "IngredientName": "Томаты"
+        },
+        {
+          "IngredientId": 4,
+          "IngredientName": "ТомаСоус"
+        },
+        {
+          "IngredientId": 7,
+          "IngredientName": "ОгурЧик"
+        },
+        {
+          "IngredientId": 10,
+          "IngredientName": "ПепперЛонг"
+        }
+      ],
+      "Categories": [
+        {
+          "CategoryId": 1,
+          "CategoryName": "ХитНета"
+        },
+        {
+          "CategoryId": 2,
+          "CategoryName": "МясДеген"
+        }
+      ],
+      "Formats": [
+        {
+          "FormatId": 1,
+          "FormatName": "МалХолд",
+          "PriceMultiplier": 1.000,
+          "CalculatedPrice": 400.00000
+        },
+        {
+          "FormatId": 2,
+          "FormatName": "СрДеген",
+          "PriceMultiplier": 1.500,
+          "CalculatedPrice": 600.00000
+        },
+        {
+          "FormatId": 3,
+          "FormatName": "БигАпе",
+          "PriceMultiplier": 1.800,
+          "CalculatedPrice": 720.00000
+        }
+      ]
+    }
+  ],
+  "Ingredients": [
+    {
+      "IngredientId": 1,
+      "IngredientName": "Лук-Газ"
+    },
+    {
+      "IngredientId": 2,
+      "IngredientName": "МоццаХолд"
+    },
+    {
+      "IngredientId": 3,
+      "IngredientName": "Томаты"
+    },
+    {
+      "IngredientId": 4,
+      "IngredientName": "ТомаСоус"
+    },
+    {
+      "IngredientId": 5,
+      "IngredientName": "ПармБуст"
+    },
+    {
+      "IngredientId": 6,
+      "IngredientName": "ЧикенХолд"
+    },
+    {
+      "IngredientId": 7,
+      "IngredientName": "ОгурЧик"
+    },
+    {
+      "IngredientId": 8,
+      "IngredientName": "ВетчХолд"
+    },
+    {
+      "IngredientId": 9,
+      "IngredientName": "ШампЛонг"
+    },
+    {
+      "IngredientId": 10,
+      "IngredientName": "ПепперЛонг"
+    }
+  ],
+  "Category": [
+    {
+      "CategoryId": 1,
+      "CategoryName": "ХитНета"
+    },
+    {
+      "CategoryId": 2,
+      "CategoryName": "МясДеген"
+    },
+    {
+      "CategoryId": 3,
+      "CategoryName": "СырБуст"
+    },
+    {
+      "CategoryId": 4,
+      "CategoryName": "ОвощДег"
+    },
+    {
+      "CategoryId": 5,
+      "CategoryName": "МореАп"
+    }
+  ],
+  "paymentMethod": [
+    {
+      "PaymentMethodId": 1,
+      "PaymentName": "КешХолд",
+      "Discount": 1
+    },
+    {
+      "PaymentMethodId": 2,
+      "PaymentName": "КартаПлс",
+      "Discount": 1.2
+    },
+    {
+      "PaymentMethodId": 3,
+      "PaymentName": "КриптаАп",
+      "Discount": 2
+    }
+  ]
+}
